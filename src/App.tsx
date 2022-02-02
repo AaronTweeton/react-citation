@@ -3,6 +3,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import React, { useState } from "react";
 import "./App.css";
 import PublicationDate from "./PublicationDate";
+import Title from "./Title";
 
 function App() {
 	const [firstName, setFirstName] = useState<string>("Sidney");
@@ -112,7 +113,7 @@ function App() {
 					<li>
 						{firstName} {lastName}
 						{firstName && lastName && title && <span>, </span>}
-						<cite>{title}</cite>
+						<Title title={title} titleType={titleType} />
 						{title && date && <span>, </span>}
 						{date && (
 							<PublicationDate
@@ -132,10 +133,7 @@ function App() {
 						{firstName && lastName && <span>, </span>}
 						{firstName}
 						{firstName && lastName && title && <span>, </span>}
-						<cite>
-							{titleType === "book" && <q>{title}</q>}
-							{titleType === "magazine" && <u>{title}</u>}
-						</cite>
+						<Title title={title} titleType={titleType} />
 						{title && date && <span>, </span>}
 						{date && (
 							<PublicationDate

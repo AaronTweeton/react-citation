@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import React, { useState } from "react";
 import "./App.css";
+import PublicationDate from "./PublicationDate";
 
 function App() {
 	const [firstName, setFirstName] = useState<string>("Sidney");
@@ -12,18 +13,6 @@ function App() {
 
 	const handleSubmit = () => {
 		console.log("submits");
-	};
-
-	const formatInputToDate = (input: string): Date => {
-		const date = new Date(input);
-		date.setDate(date.getDate() + 1);
-		return date;
-	};
-
-	const options: Intl.DateTimeFormatOptions = {
-		month: "long",
-		day: "numeric",
-		year: "numeric",
 	};
 
 	return (
@@ -123,7 +112,15 @@ function App() {
 					<li>
 						{firstName} {lastName}
 						{firstName && lastName && title && <span>, </span>}
-						<cite>{title}</cite>.
+						<cite>{title}</cite>
+						{title && date && <span>, </span>}
+						{date && (
+							<PublicationDate
+								date={date}
+								titleType={titleType}
+							/>
+						)}
+						.
 					</li>
 				</ol>
 			</section>
@@ -141,15 +138,10 @@ function App() {
 						</cite>
 						{title && date && <span>, </span>}
 						{date && (
-							<time dateTime={date}>
-								{titleType === "book" &&
-									formatInputToDate(date).getFullYear()}
-								{titleType === "magazine" &&
-									formatInputToDate(date).toLocaleDateString(
-										"en-US",
-										options
-									)}
-							</time>
+							<PublicationDate
+								date={date}
+								titleType={titleType}
+							/>
 						)}
 						.
 					</li>

@@ -13,13 +13,9 @@ function App() {
 	const [titleType, setTitleType] = useState<string>("book");
 	const [date, setDate] = useState<string>("1954-03-03");
 
-	const handleSubmit = () => {
-		console.log("submits");
-	};
-
 	return (
 		<div className="App container py-5">
-			<form className="mb-5" onSubmit={handleSubmit}>
+			<form className="mb-5">
 				<h1>Citation Generator</h1>
 				<fieldset>
 					<legend>Author</legend>

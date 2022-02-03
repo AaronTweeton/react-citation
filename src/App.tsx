@@ -9,6 +9,7 @@ function App() {
 	const [firstName, setFirstName] = useState<string>("Sidney");
 	const [lastName, setLastName] = useState<string>("Hyman");
 	const [title, setTitle] = useState<string>("The American President");
+	const [magazineTitle, setMagazineTitle] = useState<string>("Newsweek");
 	const [titleType, setTitleType] = useState<string>("book");
 	const [date, setDate] = useState<string>("1954-03-03");
 
@@ -53,19 +54,6 @@ function App() {
 				</fieldset>
 				<fieldset className="mb-3">
 					<legend>Work</legend>
-					<div className="mb-3">
-						<label htmlFor="title" className="form-label">
-							Title
-						</label>
-						<input
-							type="text"
-							className="form-control"
-							name="title"
-							id="title"
-							value={title}
-							onChange={(e) => setTitle(e.target.value)}
-						/>
-					</div>
 					<div className="form-check form-check-inline">
 						<input
 							id="book"
@@ -91,9 +79,42 @@ function App() {
 							onChange={(e) => setTitleType(e.target.value)}
 						/>
 						<label htmlFor="magazine" className="form-check-lable">
-							Magazine
+							Magazine or Newspaper
 						</label>
 					</div>
+					<div className="mb-3">
+						<label htmlFor="title" className="form-label">
+							Title
+						</label>
+						<input
+							type="text"
+							className="form-control"
+							name="title"
+							id="title"
+							value={title}
+							onChange={(e) => setTitle(e.target.value)}
+						/>
+					</div>
+					{titleType === "magazine" && (
+						<div className="mb-3">
+							<label
+								htmlFor="magazineTitle"
+								className="form-label"
+							>
+								Magazine or Newspaper Title
+							</label>
+							<input
+								type="text"
+								className="form-control"
+								name="magazineTitle"
+								id="magazineTitle"
+								value={magazineTitle}
+								onChange={(e) =>
+									setMagazineTitle(e.target.value)
+								}
+							/>
+						</div>
+					)}
 				</fieldset>
 				<fieldset className="mb-3">
 					<legend>Date</legend>
@@ -113,8 +134,11 @@ function App() {
 					<li>
 						{firstName} {lastName}
 						{firstName && lastName && title && <span>, </span>}
-						<Title title={title} titleType={titleType} />
-						{title && date && <span>, </span>}
+						<Title
+							title={title}
+							titleType={titleType}
+							magazineTitle={magazineTitle}
+						/>
 						{date && (
 							<PublicationDate
 								date={date}
@@ -133,8 +157,11 @@ function App() {
 						{firstName && lastName && <span>, </span>}
 						{firstName}
 						{firstName && lastName && title && <span>, </span>}
-						<Title title={title} titleType={titleType} />
-						{title && date && <span>, </span>}
+						<Title
+							title={title}
+							titleType={titleType}
+							magazineTitle={magazineTitle}
+						/>
 						{date && (
 							<PublicationDate
 								date={date}
@@ -154,6 +181,12 @@ function App() {
 					{firstName && lastName && title && <span>--</span>}
 					{title.replaceAll(" ", "-")}
 					{title && date && <span>--</span>}
+					{titleType === "magazine" && (
+						<>
+							{magazineTitle.replaceAll(" ", "-")}
+							<span>--</span>
+						</>
+					)}
 					{date}
 				</samp>
 			</section>
